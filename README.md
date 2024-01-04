@@ -87,8 +87,8 @@ High-level plan is represented in the table
 
 ## Technologies - Libraries
 // TODO
-<!-- - ✔️ **[`.NET 7`](https://dotnet.microsoft.com/download)** - .NET Framework and .NET Core, including ASP.NET and ASP.NET Core
-- ✔️ **[`MVC Versioning API`](https://github.com/microsoft/aspnet-api-versioning)** - Set of libraries which add service API versioning to ASP.NET Web API, OData with ASP.NET Web API, and ASP.NET Core
+ - ✔️ **[`axum`](https://github.com/tokio-rs/axum)** - A web application framework that focuses on ergonomics and modularity.
+<!-- - ✔️ **[`MVC Versioning API`](https://github.com/microsoft/aspnet-api-versioning)** - Set of libraries which add service API versioning to ASP.NET Web API, OData with ASP.NET Web API, and ASP.NET Core
 - ✔️ **[`EF Core`](https://github.com/dotnet/efcore)** - Modern object-database mapper for .NET. It supports LINQ queries, change tracking, updates, and schema migrations
 - ✔️ **[`Masstransit`](https://github.com/MassTransit/MassTransit)** - Distributed Application Framework for .NET.
 - ✔️ **[`MediatR`](https://github.com/jbogard/MediatR)** - Simple, unambitious mediator implementation in .NET.
@@ -118,42 +118,41 @@ High-level plan is represented in the table
 project_root/
 │
 ├── src/
-│   ├── main.rs                    // Entry point for the application
-│   ├── app.rs                     // Application setup and configuration
-│   ├── config.rs                  // Configuration-related structures and functions
-│   ├── slices/                    // Vertical slices of the application
-│   │   ├── feature_x/             // A feature slice (e.g., users, orders, etc.)
-│   │   │   ├── command.rs         // CQRS commands for the feature
-│   │   │   ├── query.rs           // CQRS queries for the feature
-│   │   │   ├── endpoint.rs        // Axum endpoints for the feature
-│   │   │   ├── model.rs           // Domain models for the feature
-│   │   │   ├── service.rs         // Business logic for the feature
-│   │   │   └── tests/             // Tests for the feature, including unit and integration tests
-│   │   │       ├── unit/          // Unit tests specific to the feature
-│   │   │       └── integration/   // Integration tests specific to the feature
-│   │   └── feature_y/             // Another feature slice
+│   ├── main.rs                             // Entry point for the application
+│   ├── app.rs                              // Application setup and configuration
+│   ├── config.rs                           // Configuration-related structures and functions
+│   ├── slices/                             // Vertical slices of the application
+│   │   ├── feature_x/                      // A feature slice (e.g., users, orders, etc.)
+│   │   │   ├── command.rs                  // CQRS commands for the feature
+│   │   │   ├── query.rs                    // CQRS queries for the feature
+│   │   │   ├── endpoint.rs                 // Axum endpoints for the feature
+│   │   │   ├── model.rs                    // Domain models for the feature
+│   │   │   ├── service.rs                  // Business logic for the feature
+│   │   │   ├── validators.rs               // Fluent validation logic
+│   │   │   └── tests.rs                    // Tests for the feature
+│   │   └── feature_y/                      // Another feature slice
 │   │
-│   ├── infrastructure/            // Infrastructure concerns
-│   │   ├── database.rs            // Database connection and management
-│   │   ├── messaging.rs           // Inbox/Outbox pattern implementation
-│   │   ├── monitoring/            // Monitoring setup (e.g., Prometheus, Grafana)
-│   │   │   ├── prometheus.yml     // Prometheus configuration
-│   │   │   └── grafana.ini        // Grafana configuration (if applicable)
+│   ├── infrastructure/                     // Infrastructure concerns
+│   │   ├── migrations/                     // Database migrations
+│   │   │   ├──yyyyddmm-hhMMss-create.sql   // Migration SQL script
+│   │   ├── database.rs                     // Database connection and management
+│   │   ├── messaging.rs                    // Integration for authentication
+│   │   ├── messaging.rs                    // Inbox/Outbox pattern implementation
+│   │   ├── monitoring.rs                   // Monitoring setup (e.g., Prometheus, Grafana)
 │   │   └── ...
 │   │
-│   ├── middleware/                // Custom middleware for logging, tracing, etc.
+│   ├── middleware/                         // Custom middleware for logging, tracing, etc.
 │   │   ├── logging.rs
 │   │   ├── tracing.rs
-│   │   ├── metrics.rs             // Custom middleware for metrics collection
+│   │   ├── metrics.rs                      // Custom middleware for metrics collection
 │   │   └── ...
 │   │
-│   └── utils/                     // Utility modules
-│       ├── validators.rs          // Fluent validation logic
+│   └── utils/                              // Utility modules
 │       └── ...
 │
-├── Cargo.toml                     // Rust package manifest
-├── Cargo.lock                     // Lock file for dependencies
-└── .env                           // Environment variables for local development
+├── Cargo.toml                              // Rust package manifest
+├── Cargo.lock                              // Lock file for dependencies
+└── .env                                    // Environment variables for local development
 </pre>
 ## Project References & Credits
 
