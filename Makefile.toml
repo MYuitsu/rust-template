@@ -1,0 +1,21 @@
+[tasks.install-coverage-deps]
+description = "Install the dependencies"
+script_runner = "bash"
+script = [
+    "cargo install grcov || echo 'grcov is already installed'"
+]
+
+[tasks.coverage]
+description = "Runs the tests and collects coverage data"
+dependencies = ["install-coverage-deps"]
+script_runner = "bash"
+script = [
+    "rustup component add llvm-tools-preview",
+    "export RUSTFLAGS=\"-Cinstrument-coverage\"",
+    "export LLVM_PROFILE_FILE=\"coverage-%p-%m.profraw\"",
+    "cargo test",
+    "grcov . --binary-path ./target/debug/ -s . -t html --branch --ignore-not-existing -o ./coverage/"
+]
+
+[config]
+skip_core_tasks = true
