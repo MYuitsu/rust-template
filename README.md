@@ -56,21 +56,30 @@ project_root/
 │   ├── config.rs                           // Configuration-related structures and functions
 │   ├── slices/                             // Vertical slices of the application
 │   │   ├── feature_x/                      // A feature slice (e.g., users, orders, etc.)
-│   │   │   ├── command.rs                  // CQRS commands for the feature
-│   │   │   ├── query.rs                    // CQRS queries for the feature
-│   │   │   ├── endpoint.rs                 // Axum endpoints for the feature
-│   │   │   ├── model.rs                    // Domain models for the feature
-│   │   │   ├── service.rs                  // Business logic for the feature
-│   │   │   ├── validators.rs               // Fluent validation logic
-│   │   │   └── tests.rs                    // Tests for the feature
-│   │   └── feature_y/                      // Another feature slice
+│   │   │   ├── commands/                   // CQRS commands for the feature
+│   │   │   │   ├── create_command.rs        
+│   │   │   │   ├── create_command_handler.rs        
+│   │   │   ├── queries/                    // CQRS queries for the feature
+│   │   │   │   ├── get_by_id.rs        
+│   │   │   │   ├── get_by_id_handler.rs        
+│   │   │   ├── endpoints.rs                // Axum endpoints for the feature
+│   │   │   ├── models.rs                   // Domain models for the feature
+│   │   │   ├── traits.rs                   // Domain models for the feature
+│   │   │   ├── services.rs                 // Business logic for the feature
+│   │   │   ├── repository.rs               // Repository for the feature
+│   │   │   ├── validators.rs               // Validators for the feature
+│   │   │   ├── messages.rs                 // Messages for the feature
+│   │   │   ├── tests/                      // Tests for the feature
+│   │   │   │   ├── unit_tests.rs      
+│   │   │   │   ├── integration_tests.rs      
+│   │   ├── feature_y/                      // Another feature slice
+│   │   │   ├── ....
 │   │
 │   ├── infrastructure/                     // Infrastructure concerns
 │   │   ├── migrations/                     // Database migrations
 │   │   │   ├──yyyyddmm-hhMMss-create.sql   // Migration SQL script
 │   │   ├── database.rs                     // Database connection and management
-│   │   ├── messaging.rs                    // Integration for authentication
-│   │   ├── messaging.rs                    // Inbox/Outbox pattern implementation
+│   │   ├── auth.rs                         // Integration for authentication
 │   │   ├── monitoring.rs                   // Monitoring setup (e.g., Prometheus, Grafana)
 │   │   └── ...
 │   │
@@ -93,7 +102,8 @@ project_root/
 
 ### Monolithic application
 
-- [ ] Using `Vertical Slice Architecture` for `architecture` level.
+- [x] Using `Vertical Slice Architecture` for `architecture` level.
+- [ ] Using `Test Driven Development (TDD)` for all `business processes`.
 <!-- - :sparkle: Using `Domain Driven Design (DDD)` to implement all `business processes` in microservices.
 - :sparkle: Using `Rabbitmq` on top of `Masstransit` for `Event Driven Architecture` between our microservices.
 - :sparkle: Using `gRPC` for `internal communication` between our microservices.
